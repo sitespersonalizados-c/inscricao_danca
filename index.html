@@ -1,56 +1,222 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
+/* 1. CONFIGURAÇÃO DA TELA E FUNDO CORRIGIDA */
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* Garante que o fundo sempre ocupe a tela toda */
+    min-height: 100vh; 
+}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="screen-orientation" content="portrait">
-    <meta name="orientation" content="portrait">
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
-    <title>Inscrição Dança SJC</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    background: url('fundo-danca.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    position: relative;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Escurecer o fundo - garantindo que a camada preta também cubra tudo */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+    /* Importante para desktop */
+    min-height: 100%; 
+}
+
+/* 2. CONTAINER */
+.vidro-container {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 90vw;
+    max-width: 380px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* 3. ELEMENTOS */
+.titulo-app {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: -2px;
+}
+
+.input-estilo {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.botoes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    background-color: #FF7A00;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    border-radius: 18px;
+    /* mais arredondado */
+}
+
+.btn:hover {
+    background-color: #e66e00;
+    transform: scale(1.02);
+}
+
+.btn strong {
+    display: block;
+    font-size: 16px;
+}
+
+.btn span {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* 🔒 Tela de bloqueio */
+#bloqueio-rotacao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: #000;
+    color: #fff;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+}
+
+/* Conteúdo central */
+.conteudo-bloqueio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 📱 Ícone do celular */
+.icone-rotacao {
+    width: 60px;
+    height: 100px;
+    border: 3px solid white;
+    border-radius: 15px;
+    position: relative;
+    animation: girar 1.5s infinite ease-in-out;
+}
+
+/* Botão do celular */
+.icone-rotacao::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 🔄 Animação */
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* 🔥 Ativa no modo deitado */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    #bloqueio-rotacao {
+        display: flex;
+    }
+
+    body {
+        overflow: hidden;
+    }
+}
+
     
-<div id="bloqueio-rotacao">
-    <div class="conteudo-bloqueio">
-        <div class="icone-rotacao"></div>
-        <p>Gire o celular para usar na vertical</p>
-    </div>
-</div>
+   @media screen and (min-width: 769px) {
+    body {
+        align-items: center; /* Centraliza verticalmente no monitor */
+    }
 
-    <div class="vidro-container">
-        <h2 class="titulo-app">Inscrição Dança SJC</h2>
+    .vidro-container {
+        max-width: 500px; /* Mais largo para o monitor */
+        width: 100%;
+        padding: 30px;
+        max-height: none; /* No desktop não precisa de scroll interno */
+        overflow: visible; 
+        margin: 0 auto;
+    }
 
-        <div class="container-inputs">
-            <input type="text" id="nome_user" placeholder="Nome Completo" class="input-estilo">
-            <input type="number" id="idade_user" placeholder="Idade" class="input-estilo">
-        </div>
+    .titulo-app {
+        font-size: 32px; /* Título maior no PC */
+    }
 
-        <div class="botoes-container">
-            <button onclick="enviarWhats('MOTORAMA', 'Terças: 19h às 20h')" class="btn">
-                <strong>MOTORAMA</strong>
-                <span>Terças: 19h às 20h</span>
-            </button>
-            
-            <button onclick="enviarWhats('NOVO HORIZONTE', 'Terças: 20h30 às 21h30')" class="btn">
-                <strong>NOVO HORIZONTE</strong>
-                <span>Terças: 20h30 às 21h30</span>
-            </button>
+    .input-estilo {
+        font-size: 18px;
+    }
 
-            <button onclick="enviarWhats('TATETUBA', 'Quintas: 19h às 21h')" class="btn">
-                <strong>TATETUBA</strong>
-                <span>Quintas: 19h às 21h</span>
-            </button>
+    /* Aumenta os botões para ficarem fáceis de clicar com o mouse */
+    .btn {
+        padding: 20px;
+        font-size: 18px;
+    }
+}
 
-            <button onclick="enviarWhats('GALO BRANCO', 'Sextas: 19h às 21h')" class="btn">
-                <strong>GALO BRANCO</strong>
-                <span>Sextas: 19h às 21h</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- JS separado -->
-    <script src="script.js"></script>
-</body>
-</html>
+@media screen and (max-width: 1024px) {
+    body {
+        background-attachment: scroll;
+    }
+}
