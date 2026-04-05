@@ -17,16 +17,17 @@ function enviarWhats (bairroAula, horario) {
     return;
   }
 
-  const mensagem = encodeURIComponent (
-    `📝 Nova Inscrição Dança SJC\n\n` +
-      `👤 Nome: ${nome}\n` +
-      `👕 Tamanho da Camisa: ${tamanho}\n` +
-      `📍 Endereço: ${rua}\n` +
-      `🏠 Bairro: ${bairro}\n` +
-      `📞 Telefone: ${telefone}\n\n` +
-      `📌 Bairro da Aula: ${bairroAula}\n` +
-      `⏰ Horário: ${horario}`
-  );
+const mensagem = encodeURIComponent(
+    `--- Nova Inscrição Dança SJC ---\n\n` +
+    `Nome: ${nome}\n` +
+    `Tamanho da Camisa: ${tamanho}\n` +
+    `Endereço: ${rua}\n` +
+    `Bairro: ${bairro}\n` +
+    `Telefone: ${telefone}\n\n` +
+    `--- Aula Escolhida ---\n` +
+    `Bairro: ${bairroAula}\n` +
+    `Horário: ${horario}`
+);
 
   window.open (`https://wa.me/${numero}?text=${mensagem}`, '_blank');
 }
