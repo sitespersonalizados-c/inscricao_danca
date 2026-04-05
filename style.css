@@ -6,7 +6,7 @@ body {
     padding: 0;
     overflow-x: hidden;
     /* Garante que o fundo sempre ocupe a tela toda */
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+
     background: url('fundo-danca.jpg') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
@@ -36,7 +36,7 @@ body::before {
     background: rgba(0, 0, 0, 0.4);
     z-index: -1;
     /* Importante para desktop */
-    min-height: 100%; 
+    min-height: 100%;
 }
 
 /* 2. CONTAINER */
@@ -185,23 +185,27 @@ body::before {
     }
 }
 
-    
-   @media screen and (min-width: 769px) {
+
+@media screen and (min-width: 769px) {
     body {
-        align-items: center; /* Centraliza verticalmente no monitor */
+        align-items: center;
+        /* Centraliza verticalmente no monitor */
     }
 
     .vidro-container {
-        max-width: 500px; /* Mais largo para o monitor */
+        max-width: 500px;
+        /* Mais largo para o monitor */
         width: 100%;
         padding: 30px;
-        max-height: none; /* No desktop não precisa de scroll interno */
-        overflow: visible; 
+        max-height: none;
+        /* No desktop não precisa de scroll interno */
+        overflow: visible;
         margin: 0 auto;
     }
 
     .titulo-app {
-        font-size: 32px; /* Título maior no PC */
+        font-size: 32px;
+        /* Título maior no PC */
     }
 
     .input-estilo {
@@ -210,8 +214,12 @@ body::before {
 
     /* Aumenta os botões para ficarem fáceis de clicar com o mouse */
     .btn {
-        padding: 20px;
-        font-size: 18px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .botoes-container {
+        gap: 12px;
     }
 }
 
