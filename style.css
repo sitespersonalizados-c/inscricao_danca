@@ -53,8 +53,8 @@ body::before {
     margin: 20px auto;
     box-sizing: border-box;
     text-align: center;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-height: none;
+    overflow: visible;
 }
 
 /* 3. ELEMENTOS */
@@ -218,5 +218,16 @@ body::before {
 @media screen and (max-width: 1024px) {
     body {
         background-attachment: scroll;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .botoes-container {
+        gap: 10px;
     }
 }
