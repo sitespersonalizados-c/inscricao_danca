@@ -1,26 +1,32 @@
 // 🔒 trava orientação (funciona melhor como app)
 if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock("portrait").catch(() => {});
+  screen.orientation.lock ('portrait').catch (() => {});
 }
 
-function enviarWhats(bairro, horario) {
-    const nome = document.getElementById('nome_user').value;
-    const idade = document.getElementById('idade_user').value;
-    const numero = "5512997243471"; 
+function enviarWhats (bairroAula, horario) {
+  const nome = document.getElementById ('nome_user').value;
+  const rua = document.getElementById ('rua_user').value;
+  const bairro = document.getElementById ('bairro_user').value;
+  const tamanho = document.getElementById ('tamanho_user').value;
+  const telefone = document.getElementById ('telefone_user').value;
 
-    if (!nome || !idade) {
-        alert("Por favor, preencha seu Nome e Idade!");
-        return;
-    }
+  const numero = '5512997243471';
 
-    // ✅ evita erro com acento
-    const mensagem = encodeURIComponent(
-        `Nova Inscrição Dança SJC\n` +
-        `Nome: ${nome}\n` +
-        `Idade: ${idade}\n` +
-        `Bairro: ${bairro}\n` +
-        `Horário: ${horario}`
-    );
+  if (!nome || !rua || !bairro || !tamanho || !telefone) {
+    alert ('Por favor, preencha todos os campos!');
+    return;
+  }
 
-    window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
+  const mensagem = encodeURIComponent (
+    `📝 Nova Inscrição Dança SJC\n\n` +
+      `👤 Nome: ${nome}\n` +
+      `👕 Tamanho da Camisa: ${tamanho}\n` +
+      `📍 Endereço: ${rua}\n` +
+      `🏠 Bairro: ${bairro}\n` +
+      `📞 Telefone: ${telefone}\n\n` +
+      `📌 Bairro da Aula: ${bairroAula}\n` +
+      `⏰ Horário: ${horario}`
+  );
+
+  window.open (`https://wa.me/${numero}?text=${mensagem}`, '_blank');
 }
