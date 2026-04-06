@@ -1,11 +1,10 @@
-/* 1. CONFIGURAÇÃO DA TELA E FUNDO CORRIGIDA */
+/* 1. CONFIGURAÇÃO DA TELA E FUNDO */
 html,
 body {
     width: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    /* Garante que o fundo sempre ocupe a tela toda */
     min-height: 100vh;
 }
 
@@ -25,7 +24,7 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-/* Escurecer o fundo - garantindo que a camada preta também cubra tudo */
+/* Fundo escuro */
 body::before {
     content: "";
     position: absolute;
@@ -35,8 +34,6 @@ body::before {
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
     z-index: -1;
-    /* Importante para desktop */
-    min-height: 100%;
 }
 
 /* 2. CONTAINER */
@@ -48,13 +45,12 @@ body::before {
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 25px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
     width: 90vw;
     max-width: 380px;
     margin: 20px auto;
     box-sizing: border-box;
     text-align: center;
-    max-height: none;
-    overflow: visible;
 }
 
 /* 3. ELEMENTOS */
@@ -62,12 +58,11 @@ body::before {
     color: white;
     font-size: 24px;
     margin-bottom: 20px;
-    margin-top: -2px;
 }
 
 .input-estilo {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border-radius: 12px;
     border: none;
     margin-bottom: 12px;
@@ -75,42 +70,79 @@ body::before {
     box-sizing: border-box;
 }
 
-.botoes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
+/* BOTÕES PADRÃO */
 .btn {
     width: 100%;
-    padding: 18px;
+    padding: 22px 30px;
+    /* Aumentado: Mais altura e largura interna */
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
+    /* Bordas um pouco mais arredondadas para combinar */
     color: white;
     background-color: #FF7A00;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 16px;
-    border-radius: 18px;
-    /* mais arredondado */
+    font-size: 20px;
+    /* Aumentado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .btn:hover {
     background-color: #e66e00;
-    transform: scale(1.02);
+    transform: scale(1.03);
+    /* Leve aumento ao passar o mouse */
 }
 
 .btn strong {
     display: block;
-    font-size: 16px;
+    font-size: 18px;
+    /* Nome do bairro maior */
+    letter-spacing: 1px;
 }
 
 .btn span {
-    font-size: 12px;
+    font-size: 14px;
+    /* Horário maior */
     opacity: 0.9;
 }
 
-/* 🔒 Tela de bloqueio */
+/* 🔘 Botão desativado */
+.btn-desativado {
+    background-color: #888;
+    cursor: not-allowed;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* 🚀 CARROSSEL */
+.carrossel-botoes {
+    display: flex;
+    gap: 15px;
+    /* Mais espaço entre os botões */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 15px 0;
+    /* Mais respiro em cima e embaixo */
+}
+
+.carrossel-botoes .btn {
+    min-width: 280px;
+    /* Botões mais largos no carrossel */
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+}
+
+.carrossel-botoes::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* 🔒 BLOQUEIO DE ROTAÇÃO */
 #bloqueio-rotacao {
     position: fixed;
     top: 0;
@@ -128,7 +160,6 @@ body::before {
     z-index: 9999;
 }
 
-/* Conteúdo central */
 .conteudo-bloqueio {
     display: flex;
     flex-direction: column;
@@ -136,7 +167,6 @@ body::before {
     gap: 20px;
 }
 
-/* 📱 Ícone do celular */
 .icone-rotacao {
     width: 60px;
     height: 100px;
@@ -146,7 +176,6 @@ body::before {
     animation: girar 1.5s infinite ease-in-out;
 }
 
-/* Botão do celular */
 .icone-rotacao::after {
     content: "";
     width: 10px;
@@ -159,7 +188,6 @@ body::before {
     transform: translateX(-50%);
 }
 
-/* 🔄 Animação */
 @keyframes girar {
     0% {
         transform: rotate(0deg);
@@ -174,68 +202,82 @@ body::before {
     }
 }
 
-/* 🔥 Ativa no modo deitado */
-@media screen and (max-width: 1024px) and (orientation: landscape) {
-    #bloqueio-rotacao {
-        display: flex;
+/* 🔒 Controle via JS */
+html.bloquear-rotacao #bloqueio-rotacao {
+    display: flex;
+}
+
+html.bloquear-rotacao body {
+    overflow: hidden;
+}
+
+/* 📱 MOBILE */
+@media screen and (max-width: 480px) {
+    .btn {
+        padding: 16px 18px;
+        font-size: 16px;
     }
 
-    body {
-        overflow: hidden;
+    .btn strong {
+        font-size: 16px;
+    }
+
+    .carrossel-botoes .btn {
+        min-width: 250px;
+        /* Um pouco menor no celular para aparecer o próximo */
     }
 }
 
-
+/* 💻 DESKTOP */
 @media screen and (min-width: 769px) {
-    body {
-        align-items: center;
-        /* Centraliza verticalmente no monitor */
-    }
-
     .vidro-container {
         max-width: 500px;
-        /* Mais largo para o monitor */
-        width: 100%;
         padding: 30px;
-        max-height: none;
-        /* No desktop não precisa de scroll interno */
-        overflow: visible;
-        margin: 0 auto;
     }
 
     .titulo-app {
         font-size: 32px;
-        /* Título maior no PC */
     }
 
     .input-estilo {
         font-size: 18px;
     }
 
-    /* Aumenta os botões para ficarem fáceis de clicar com o mouse */
-    .btn {
-        padding: 12px;
-        font-size: 14px;
+   .carrossel-botoes .btn {
+        min-width: 250px; /* Bem grandes no computador */
     }
-
-    .botoes-container {
-        gap: 12px;
+    
+    .btn {
+        padding: 18px;
     }
 }
 
+/* 📱 CORREÇÃO MOBILE (fundo não mexer) */
 @media screen and (max-width: 1024px) {
     body {
         background-attachment: scroll;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .btn {
-        padding: 12px;
-        font-size: 14px;
-    }
+.indicadores-carrossel {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
 
-    .botoes-container {
-        gap: 10px;
-    }
+.ponto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    /* Bolinha apagada */
+    transition: 0.3s;
+}
+
+.ponto.ativo {
+    background: #FF7A00;
+    /* Cor igual aos seus botões */
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 122, 0, 0.5);
 }
