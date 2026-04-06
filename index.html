@@ -27,12 +27,13 @@
         <div class="container-inputs">
             <input type="text" id="nome_user" placeholder="Nome Completo" class="input-estilo">
             <input type="text" id="tamanho_user" placeholder="Tamanho da Camisa (P, M, G...)" class="input-estilo">
-            <input type="text" id="rua_user" placeholder="Rua e Número (Ex: Rua A, 123)" class="input-estilo">
+            <input type="text" id="rua_user" placeholder="Rua (Ex: Rua A)" class="input-estilo">
+            <input type="text" id="num_casa_user" placeholder="Número da Residência" class="input-estilo">
             <input type="text" id="bairro_user" placeholder="Bairro" class="input-estilo">
             <input type="tel" id="telefone_user" placeholder="Telefone (com DDD)" class="input-estilo">
         </div>
 
-        <div class="botoes-container">
+        <div class="carrossel-botoes">
             <button onclick="enviarWhats('MOTORAMA', 'Terças: 19h às 20h')" class="btn">
                 <strong>MOTORAMA</strong>
                 <span>Terças: 19h às 20h</span>
@@ -52,7 +53,14 @@
                 <strong>GALO BRANCO</strong>
                 <span>Sextas: 19h às 20h</span>
             </button>
+
+            <button class="btn btn-desativado">
+                <strong>SANTA INÊS</strong>
+                <span>Em breve</span>
+            </button>
         </div>
+
+        <div class="indicadores-carrossel" id="indicadores"></div>
     </div>
 
     <!-- JS separado -->
